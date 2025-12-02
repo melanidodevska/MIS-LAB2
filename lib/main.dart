@@ -1,7 +1,25 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:mis_lab2/services/local_notification_service.dart';
+import 'firebase_options.dart';
 import 'screens/categories_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  final LocalNotificationService notificationService =
+  LocalNotificationService();
+  await notificationService.initialize();
+
+
+  notificationService.startPeriodicNotifications();
+
   runApp(const MyApp());
 }
 
@@ -14,7 +32,7 @@ class MyApp extends StatelessWidget {
       title: 'Рецепти',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.orange,
+        primarySwatch: Colors.brown,
         useMaterial3: true,
       ),
       home: const CategoriesScreen(),

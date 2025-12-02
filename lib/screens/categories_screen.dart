@@ -5,6 +5,7 @@ import '../widgets/category_card.dart';
 import '../widgets/search_bar_widget.dart';
 import 'meals_screen.dart';
 import 'meal_details_screen.dart';
+import 'favorites_screen.dart';
 
 class CategoriesScreen extends StatefulWidget {
   const CategoriesScreen({Key? key}) : super(key: key);
@@ -82,6 +83,16 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
         title: const Text('Рецепти'),
         backgroundColor: Colors.brown,
         actions: [
+          IconButton(
+            icon: const Icon(Icons.favorite),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const FavoritesScreen()),
+              );
+            },
+            tooltip: 'Омилени',
+          ),
           IconButton(
             icon: const Icon(Icons.food_bank_outlined),
             onPressed: _showRandomMeal,
